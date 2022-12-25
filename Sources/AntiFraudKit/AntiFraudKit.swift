@@ -40,6 +40,7 @@ public struct ATFraud: View {
             .background(.ultraThinMaterial)
             .ignoresSafeArea(.all)
             .task {
+#if os(iOS)
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     showCheckingSheet = true
                 }
@@ -47,6 +48,10 @@ public struct ATFraud: View {
                 Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
                     checkJailbreak()
                 }
+#elseif os(macOS)
+                showCheckingSheet = true
+#endif
+                
                 if purchasedVersion == "" && purchasedDate == "" {
                     await verifyPurchase()
                 }
@@ -154,7 +159,11 @@ public struct ATFraud: View {
             switch result {
                 
             case .unverified(_, let verificationError):
-                showAlertBox = true
+#if os(iOS)
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    showAlertBox = true
+                }
+#endif
                 err = "\(verificationError)"
                 
             case .verified(let appTransaction):
@@ -166,13 +175,18 @@ public struct ATFraud: View {
         }
         catch {
             err = "Invalid"
-            showAlertBox = true
+#if os(iOS)
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    showAlertBox = true
+                }
+#endif
             await verifyPurchase()
         }
     }
 
-    public func checkJailbreak() {
 #if os(iOS)
+    public func checkJailbreak() {
+
         if !allowJailbreak {
             if FileManager.default.fileExists(atPath: "/Applications/Cydia.app") || UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
                 exit(0)
@@ -182,7 +196,8 @@ public struct ATFraud: View {
         } else {
             print("Allow JB happen!")
         }
-#endif
     }
+#endif
+
 }
 
