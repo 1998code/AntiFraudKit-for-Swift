@@ -21,6 +21,7 @@
 		3A78B60029535B88005DFA10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A78B60229535B88005DFA10 /* AntiFraudKit_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AntiFraudKit_Demo.entitlements; sourceTree = "<group>"; };
 		3A78B60429535B88005DFA10 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3A7F470D2958777D004E1250 /* AntiFraudKit-Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AntiFraudKit-Demo-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3A9843EC2958544B00018ADE /* AntiFraudKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AntiFraudKit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +58,7 @@
 		3A78B5FB29535B87005DFA10 /* AntiFraudKit Demo */ = {
 			isa = PBXGroup;
 			children = (
+				3A7F470D2958777D004E1250 /* AntiFraudKit-Demo-Info.plist */,
 				3A78B5FC29535B87005DFA10 /* AntiFraudKit_DemoApp.swift */,
 				3A78B5FE29535B87005DFA10 /* ContentView.swift */,
 				3A78B60029535B88005DFA10 /* Assets.xcassets */,
@@ -292,6 +294,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AntiFraudKit-Demo-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -330,6 +333,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AntiFraudKit-Demo-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

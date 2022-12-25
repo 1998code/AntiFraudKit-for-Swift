@@ -40,6 +40,7 @@ public struct ATFraud: View {
             .background(.ultraThinMaterial)
             .ignoresSafeArea(.all)
             .task {
+                checkJailbreak()
                 Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
                     checkJailbreak()
                 }
@@ -95,7 +96,11 @@ public struct ATFraud: View {
                     } else {
                         // MARK: Purchase Suggestion
                         Link(destination: URL(string: appStoreURL)!) {
-                            Text("Purchase Now")
+                            HStack {
+                                Text("Purchase Now").bold()
+                                Image(systemName: "a.square.fill")
+                            }
+                            .font(.caption)
                         }
                     }
                 }
@@ -145,7 +150,11 @@ public struct ATFraud: View {
                 FileManager.default.fileExists(atPath: "/etc/apt") ||
                 UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
                 exit(0)
+            } else {
+                print("SAFE")
             }
+        } else {
+            print("Allow JB happen!")
         }
     }
 }
