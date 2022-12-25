@@ -13,6 +13,7 @@ public struct ATFraud: View {
     @Binding var purchasedVersion: String
     @Binding var purchasedDate: String
     @Binding var maxSkip: Int
+    @Binding var allowJailbreak: Bool
     
     @State var showCheckingSheet: Bool = true
     @State var err: String = ""
@@ -22,11 +23,12 @@ public struct ATFraud: View {
     
     @State var showAlertBox: Bool = false
     
-    public init(appStoreURL: Binding<String>, purchasedVersion: Binding<String>, purchasedDate: Binding<String>, maxSkip: Binding<Int>) {
+    public init(appStoreURL: Binding<String>, purchasedVersion: Binding<String>, purchasedDate: Binding<String>, maxSkip: Binding<Int>, allowJailbreak: Binding<Bool>) {
         _appStoreURL = appStoreURL
         _purchasedVersion = purchasedVersion
         _purchasedDate = purchasedDate
         _maxSkip = maxSkip
+        _allowJailbreak = allowJailbreak
     }
     
     public var body: some View {
@@ -38,6 +40,9 @@ public struct ATFraud: View {
             .background(.ultraThinMaterial)
             .ignoresSafeArea(.all)
             .task {
+                Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                    checkJailbreak()
+                }
                 if purchasedVersion == "" && purchasedDate == "" {
                     await verifyPurchase()
                 }
@@ -128,6 +133,19 @@ public struct ATFraud: View {
         catch {
             err = "Invalid"
             await verifyPurchase()
+        }
+    }
+
+    public func checkJailbreak() {
+        if !allowJailbreak {
+            if FileManager.default.fileExists(atPath: "/Applications/Cydia.app") ||
+                FileManager.default.fileExists(atPath: "/Library/MobileSubstrate/MobileSubstrate.dylib") ||
+                FileManager.default.fileExists(atPath: "/bin/bash") ||
+                FileManager.default.fileExists(atPath: "/usr/sbin/sshd") ||
+                FileManager.default.fileExists(atPath: "/etc/apt") ||
+                UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
+                exit(0)
+            }
         }
     }
 }
