@@ -57,9 +57,9 @@ Light | Dark
 ------------- | ------------
 ![IMG_6A0BAFDBBAB2-2](https://user-images.githubusercontent.com/54872601/209469243-618b2135-447f-422e-b676-db7b5c2e6276.jpeg) | ![IMG_6A0BAFDBBAB2-1](https://user-images.githubusercontent.com/54872601/209469241-45522b8e-5dc5-4903-8080-9261f00f56dc.jpeg)
 
-Ask for Signin | Login Error
-------------- | ------------
-<img width="316" alt="CleanShot 2022-12-25 at 21 46 46@2x" src="https://user-images.githubusercontent.com/54872601/209470374-f9f51fe3-21ab-4041-80af-522e76d78283.png"> | <img width="304" alt="CleanShot 2022-12-25 at 21 46 58@2x" src="https://user-images.githubusercontent.com/54872601/209470384-16038742-d7f1-485d-bf31-891fcac51cc8.png">
+Ask for Signin | Login Error | Skip Alert on macOS
+------------- | ------------ | -------------------
+<img width="316" alt="CleanShot 2022-12-25 at 21 46 46@2x" src="https://user-images.githubusercontent.com/54872601/209470374-f9f51fe3-21ab-4041-80af-522e76d78283.png"> | <img width="304" alt="CleanShot 2022-12-25 at 21 46 58@2x" src="https://user-images.githubusercontent.com/54872601/209470384-16038742-d7f1-485d-bf31-891fcac51cc8.png"> | <img width="372" alt="CleanShot 2022-12-25 at 22 11 39@2x" src="https://user-images.githubusercontent.com/54872601/209471284-6be2b53a-b4fe-4fe8-9618-ac9222c514a4.png">
 
 ## Demo
 Path: `./Demo` (Xcode Project in SwiftUI)
