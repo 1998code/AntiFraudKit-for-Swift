@@ -75,7 +75,7 @@ public struct ATFraud: View {
                 }
             }.padding()
             .toolbar {
-                #if os(iOS)
+#if os(iOS)
                 ToolbarItemGroup(placement:.navigationBarLeading) {
                     Text("Anti-Fraud Checking...")
                         .bold()
@@ -104,13 +104,17 @@ public struct ATFraud: View {
                         }
                     }
                 }
-                #endif
+#endif
             }
             .alert(isPresented: $showAlertBox) {
                 Alert(title: Text("Anti-Fraud Checking"),
                       message: Text("You have skipped \(currentSkip) times. You can skip \(maxSkip) times. \(maxSkip-currentSkip) times left."),
                         primaryButton: .cancel(Text("Purchase Now"), action: {
+#if os(iOS)
                             UIApplication.shared.open(URL(string: appStoreURL)!)
+#elseif os(macOS)
+                            NSWorkspace.shared.open(URL(string: appStoreURL)!)
+#endif
                         }),
                         secondaryButton: .default(Text("Skip Once"), action: {
                             showCheckingSheet = false
@@ -142,6 +146,7 @@ public struct ATFraud: View {
     }
 
     public func checkJailbreak() {
+#if os(iOS)
         if !allowJailbreak {
             if FileManager.default.fileExists(atPath: "/Applications/Cydia.app") || UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
                 exit(0)
@@ -151,6 +156,7 @@ public struct ATFraud: View {
         } else {
             print("Allow JB happen!")
         }
+#endif
     }
 }
 

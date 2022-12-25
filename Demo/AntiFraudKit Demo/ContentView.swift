@@ -25,7 +25,7 @@ struct ContentView: View {
             }.ignoresSafeArea(.all)
             
             // MARK: - ATFraud Start
-            if #available(iOS 16, *) {
+            if #available(iOS 16, macOS 13, *) {
                 ATFraud(appStoreURL: $appStoreURL, purchasedVersion: $purchasedVersion, purchasedDate: $purchasedDate, maxSkip: $maxSkip, allowJailbreak: $allowJailbreak)
             }
         }
