@@ -9,9 +9,9 @@ import PackageDescription
 let package = Package(
     name: "AntiFraudKit",
     platforms: [
-        .iOS(.v16),
-        .watchOS(.v9),
-        .macOS(.v13)
+        .iOS(.v14),
+        .watchOS(.v7),
+        .macOS(.v11)
     ],
     products: [
         .library(

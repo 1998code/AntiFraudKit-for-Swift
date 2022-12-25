@@ -21,11 +21,13 @@ struct ContentView: View {
             // MARK: - Replace with your content
             VStack{
                 Color.green
-                Color.teal
+                Color.blue
             }.ignoresSafeArea(.all)
             
-            // MARK: - Replace End Here & ATFraud Start
-            ATFraud(appStoreURL: $appStoreURL, purchasedVersion: $purchasedVersion, purchasedDate: $purchasedDate, maxSkip: $maxSkip, allowJailbreak: $allowJailbreak)
+            // MARK: - ATFraud Start
+            if #available(iOS 16, *) {
+                ATFraud(appStoreURL: $appStoreURL, purchasedVersion: $purchasedVersion, purchasedDate: $purchasedDate, maxSkip: $maxSkip, allowJailbreak: $allowJailbreak)
+            }
         }
     }
 }
