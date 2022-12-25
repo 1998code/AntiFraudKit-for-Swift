@@ -52,9 +52,9 @@ public struct ATFraud: View {
                 #if os(iOS)
                 NavigationView {
                     sheet
-                        .presentationDetents([.fraction(0.15)])
-                        .interactiveDismissDisabled()
                 }
+                .presentationDetents([.fraction(0.15)])
+                .interactiveDismissDisabled()
                 #elseif os(macOS)
                 sheet
                     .interactiveDismissDisabled()
