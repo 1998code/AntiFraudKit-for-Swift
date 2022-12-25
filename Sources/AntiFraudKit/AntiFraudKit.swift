@@ -15,7 +15,7 @@ public struct ATFraud: View {
     @Binding var maxSkip: Int
     @Binding var allowJailbreak: Bool
     
-    @State var showCheckingSheet: Bool = true
+    @State var showCheckingSheet: Bool = false
     @State var err: String = ""
     
     @AppStorage("currentSkip") var currentSkip: Int = 0
@@ -40,6 +40,9 @@ public struct ATFraud: View {
             .background(.ultraThinMaterial)
             .ignoresSafeArea(.all)
             .task {
+                if UIDevice.current.userInterfaceIdiom != .pad {
+                    showCheckingSheet = true
+                }
                 checkJailbreak()
                 Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
                     checkJailbreak()
@@ -59,6 +62,25 @@ public struct ATFraud: View {
                 sheet
                     .interactiveDismissDisabled()
                 #endif
+            }
+            .alert(isPresented: $showAlertBox) {
+                Alert(title: Text("Anti-Fraud Checking"),
+                      message: Text("You have skipped \(currentSkip) times. You can skip \(maxSkip) times. \(maxSkip-currentSkip) times left."),
+                    primaryButton: .cancel(Text("Purchase Now"), action: {
+#if os(iOS)
+                        UIApplication.shared.open(URL(string: appStoreURL)!)
+#elseif os(macOS)
+                        NSWorkspace.shared.open(URL(string: appStoreURL)!)
+#endif
+                    }),
+                    secondaryButton: .default(Text("Skip Once"), action: {
+                        if currentSkip < maxSkip {
+                            currentSkip += 1
+                            showCheckingSheet = false
+                            skip = true
+                        }
+                    })
+                )
             }
         }
     }
@@ -98,28 +120,12 @@ public struct ATFraud: View {
             }
 #endif
         }
-        .alert(isPresented: $showAlertBox) {
-            Alert(title: Text("Anti-Fraud Checking"),
-                  message: Text("You have skipped \(currentSkip) times. You can skip \(maxSkip) times. \(maxSkip-currentSkip) times left."),
-                    primaryButton: .cancel(Text("Purchase Now"), action: {
-#if os(iOS)
-                        UIApplication.shared.open(URL(string: appStoreURL)!)
-#elseif os(macOS)
-                        NSWorkspace.shared.open(URL(string: appStoreURL)!)
-#endif
-                    }),
-                    secondaryButton: .default(Text("Skip Once"), action: {
-                        showCheckingSheet = false
-                        skip = true
-                    }))
-        }
     }
     
     public var sheetAction: some View {
         Group {
             if currentSkip < maxSkip {
                 Button(action: {
-                    currentSkip += 1
                     showAlertBox = true
                 }) {
                     HStack {
@@ -148,6 +154,7 @@ public struct ATFraud: View {
             switch result {
                 
             case .unverified(_, let verificationError):
+                showAlertBox = true
                 err = "\(verificationError)"
                 
             case .verified(let appTransaction):
@@ -159,6 +166,7 @@ public struct ATFraud: View {
         }
         catch {
             err = "Invalid"
+            showAlertBox = true
             await verifyPurchase()
         }
     }
