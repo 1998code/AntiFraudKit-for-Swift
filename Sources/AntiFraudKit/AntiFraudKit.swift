@@ -143,12 +143,7 @@ public struct ATFraud: View {
 
     public func checkJailbreak() {
         if !allowJailbreak {
-            if FileManager.default.fileExists(atPath: "/Applications/Cydia.app") ||
-                FileManager.default.fileExists(atPath: "/Library/MobileSubstrate/MobileSubstrate.dylib") ||
-                FileManager.default.fileExists(atPath: "/bin/bash") ||
-                FileManager.default.fileExists(atPath: "/usr/sbin/sshd") ||
-                FileManager.default.fileExists(atPath: "/etc/apt") ||
-                UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
+            if FileManager.default.fileExists(atPath: "/Applications/Cydia.app") || UIApplication.shared.canOpenURL(URL(string: "cydia://package/com.example.package")!) {
                 exit(0)
             } else {
                 print("SAFE")
