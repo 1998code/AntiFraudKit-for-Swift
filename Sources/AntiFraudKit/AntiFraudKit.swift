@@ -160,7 +160,7 @@ public struct ATFraud: View {
                 
             case .unverified(_, let verificationError):
 #if os(iOS)
-                if UIDevice.current.userInterfaceIdiom != .pad {
+                if await UIDevice.current.userInterfaceIdiom != .pad {
                     showAlertBox = true
                 }
 #endif
@@ -176,9 +176,9 @@ public struct ATFraud: View {
         catch {
             err = "Invalid"
 #if os(iOS)
-                if UIDevice.current.userInterfaceIdiom != .pad {
-                    showAlertBox = true
-                }
+            if await UIDevice.current.userInterfaceIdiom != .pad {
+                showAlertBox = true
+            }
 #endif
             await verifyPurchase()
         }
