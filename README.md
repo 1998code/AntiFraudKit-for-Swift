@@ -57,6 +57,18 @@ if #available(iOS 16, macOS 13, *) {
 ```
 Instead of using seperate states, inline binding works too.
 
+4. (Optional) If you wish to detect Jailbreak Status, be sure to add this keys to ```Info.plist```
+<img width="569" alt="CleanShot 2022-12-25 at 22 45 17@2x" src="https://user-images.githubusercontent.com/54872601/209472464-0c100c59-a78d-4319-aae5-4440c6747ff6.png">
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>cydia</string>
+</array>
+</plist>
+```
+
 ## Developer Note
 - Please report bugs in Issues section.
 - If you want to discuss future roadmap or contribution, please find on Discussions.
