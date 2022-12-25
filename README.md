@@ -39,6 +39,7 @@ import AntiFraudKit
 ```
 
 2. Add States before body or any some View.
+
 Samples:
 ```swift
 @State var appStoreURL: String = "https://apps.apple.com/app/betterappicons/id1532627187"   // Suggest user to download via App Store
@@ -47,6 +48,14 @@ Samples:
 @State var maxSkip: Int = 10                                                                // Set Max Skip Times in case your user may not be able to verify at that moment
 @State var allowJailbreak: Bool = false                                                     // Prevent user to tweak your app/game in a JB environment
 ```
+
+3. Then, paste this code inside body or any some View.
+```swift
+if #available(iOS 16, macOS 13, *) {
+  ATFraud(appStoreURL: $appStoreURL, purchasedVersion: $purchasedVersion, purchasedDate: $purchasedDate, maxSkip: $maxSkip, allowJailbreak: $allowJailbreak)
+}
+```
+Instead of using seperate states, inline binding works too.
 
 ## Developer Note
 - Please report bugs in Issues section.
