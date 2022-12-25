@@ -27,10 +27,10 @@ macOS     | 13     | 13
 
 ## Get Started
 ### Guide
-Coming Soon
+Coming Soon 🤗
 
 ### Basic Setup
-Coming Soon
+Coming Soon 🤗
 
 ### Major Usage
 1. Import the framework
