@@ -49,77 +49,95 @@ public struct ATFraud: View {
                 }
             }
             .sheet(isPresented: $showCheckingSheet) {
+                #if os(iOS)
+                NavigationView {
+                    sheet
+                        .presentationDetents([.fraction(0.15)])
+                        .interactiveDismissDisabled()
+                }
+                #elseif os(macOS)
                 sheet
-                    .presentationDetents([.fraction(0.15)])
                     .interactiveDismissDisabled()
+                #endif
             }
         }
     }
     
-    var sheet: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Label("App Store Receipt", systemImage: "purchased.circle")
-                    }
-                    Spacer()
-                    if err != "" || purchasedVersion != "" || purchasedVersion != "" {
-                        Label(purchasedVersion != "" && purchasedVersion != "" ? "OK" : err,
-                              systemImage: purchasedVersion != "" && purchasedVersion != "" ? "checkmark.diamond.fill" : "xmark.diamond.fill")
-                        .foregroundColor(purchasedVersion != "" && purchasedVersion != "" ? .teal : .red)
-                        .padding(.trailing,5)
-                    } else {
-                        ProgressView()
-                    }
-                }
-            }.padding()
-            .toolbar {
-#if os(iOS)
-                ToolbarItemGroup(placement:.navigationBarLeading) {
-                    Text("Anti-Fraud Checking...")
-                        .bold()
-                }
-                ToolbarItemGroup(placement:.navigationBarTrailing) {
-                    if currentSkip < maxSkip {
-                        Button(action: {
-                            currentSkip += 1
-                            showAlertBox = true
-                        }) {
-                            HStack {
-                                Text("Skip Once").bold()
-                                Image(systemName: "goforward.plus")
-                            }.font(.caption)
-                        }
-                        .tint(.accentColor)
-                        .buttonStyle(.bordered)
-                    } else {
-                        // MARK: Purchase Suggestion
-                        Link(destination: URL(string: appStoreURL)!) {
-                            HStack {
-                                Text("Purchase Now").bold()
-                                Image(systemName: "a.square.fill")
-                            }
-                            .font(.caption)
-                        }
-                    }
-                }
-#endif
+    public var sheet: some View {
+        VStack {
+            #if os(macOS)
+            HStack {
+                Text("Anti-Fraud Checking...")
+                    .bold()
+                sheetAction
             }
-            .alert(isPresented: $showAlertBox) {
-                Alert(title: Text("Anti-Fraud Checking"),
-                      message: Text("You have skipped \(currentSkip) times. You can skip \(maxSkip) times. \(maxSkip-currentSkip) times left."),
-                        primaryButton: .cancel(Text("Purchase Now"), action: {
+            #endif
+            HStack {
+                VStack(alignment: .leading) {
+                    Label("App Store Receipt", systemImage: "purchased.circle")
+                }
+                Spacer()
+                if err != "" || purchasedVersion != "" || purchasedVersion != "" {
+                    Label(purchasedVersion != "" && purchasedVersion != "" ? "OK" : err,
+                          systemImage: purchasedVersion != "" && purchasedVersion != "" ? "checkmark.diamond.fill" : "xmark.diamond.fill")
+                    .foregroundColor(purchasedVersion != "" && purchasedVersion != "" ? .teal : .red)
+                    .padding(.trailing,5)
+                } else {
+                    ProgressView()
+                }
+            }
+        }.padding()
+        .toolbar {
 #if os(iOS)
-                            UIApplication.shared.open(URL(string: appStoreURL)!)
-#elseif os(macOS)
-                            NSWorkspace.shared.open(URL(string: appStoreURL)!)
+            ToolbarItemGroup(placement:.navigationBarLeading) {
+                Text("Anti-Fraud Checking...")
+                    .bold()
+            }
+            ToolbarItemGroup(placement:.navigationBarTrailing) {
+                sheetAction
+            }
 #endif
-                        }),
-                        secondaryButton: .default(Text("Skip Once"), action: {
-                            showCheckingSheet = false
-                            skip = true
-                        }))
+        }
+        .alert(isPresented: $showAlertBox) {
+            Alert(title: Text("Anti-Fraud Checking"),
+                  message: Text("You have skipped \(currentSkip) times. You can skip \(maxSkip) times. \(maxSkip-currentSkip) times left."),
+                    primaryButton: .cancel(Text("Purchase Now"), action: {
+#if os(iOS)
+                        UIApplication.shared.open(URL(string: appStoreURL)!)
+#elseif os(macOS)
+                        NSWorkspace.shared.open(URL(string: appStoreURL)!)
+#endif
+                    }),
+                    secondaryButton: .default(Text("Skip Once"), action: {
+                        showCheckingSheet = false
+                        skip = true
+                    }))
+        }
+    }
+    
+    public var sheetAction: some View {
+        Group {
+            if currentSkip < maxSkip {
+                Button(action: {
+                    currentSkip += 1
+                    showAlertBox = true
+                }) {
+                    HStack {
+                        Text("Skip Once").bold()
+                        Image(systemName: "goforward.plus")
+                    }.font(.caption)
+                }
+                .tint(.accentColor)
+                .buttonStyle(.bordered)
+            } else {
+                // MARK: Purchase Suggestion
+                Link(destination: URL(string: appStoreURL)!) {
+                    HStack {
+                        Text("Purchase Now").bold()
+                        Image(systemName: "a.square.fill")
+                    }
+                    .font(.caption)
+                }
             }
         }
     }
