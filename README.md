@@ -57,7 +57,7 @@ if #available(iOS 16, macOS 13, *) {
 ```
 Instead of using seperate states, inline binding works too.
 
-4. (Optional) If you wish to detect Jailbreak Status, be sure to add this keys to ```Info.plist```
+4. (Optional) If you wish to detect Jailbreak Status, be sure to add this key to ```Info.plist```
 <img width="569" alt="CleanShot 2022-12-25 at 22 45 17@2x" src="https://user-images.githubusercontent.com/54872601/209472464-0c100c59-a78d-4319-aae5-4440c6747ff6.png">
 
 ```xml
