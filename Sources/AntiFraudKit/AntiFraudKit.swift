@@ -125,7 +125,7 @@ public struct ATFraud: View {
             let result: VerificationResult<AppTransaction> = try await AppTransaction.shared
             switch result {
                 
-            case .unverified(let appTransaction, let verificationError):
+            case .unverified(_, let verificationError):
                 err = "\(verificationError)"
                 
             case .verified(let appTransaction):
