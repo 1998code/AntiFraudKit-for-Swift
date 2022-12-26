@@ -32,7 +32,7 @@ Coming Soon 🤗
 ### Basic Setup
 1. Add ```https://github.com/1998code/AntiFraudKit-for-Swift``` to package and switch to ```main``` branch.
 <img width="1194" alt="CleanShot 2022-12-26 at 11 21 07@2x" src="https://user-images.githubusercontent.com/54872601/209495745-7b6a9267-9ac9-4bc0-a49e-7f200cd8a415.png">
-
+2. Add Package to target.
 
 ### Major Usage
 1. Import the framework
@@ -41,14 +41,21 @@ import AntiFraudKit
 ```
 
 2. Add States before body or any some View.
+State | Type | Default | Remark
+--------- | ------ | ----------
+appStoreURL | String | "https://apps.apple.com/app/betterappicons/id1532627187" | Suggest user to download via App Store
+purchasedVersion | String | "" | Return Purchased Version
+purchasedDate | String | "" | Return Purchased Version
+maxSkip | String | "" | Set Max Skip Times in case your user may not be able to verify at that moment
+allowJailbreak | String | "" | Prevent user to tweak your app/game in a JB environment
 
 Samples:
 ```swift
-@State var appStoreURL: String = "https://apps.apple.com/app/betterappicons/id1532627187"   // Suggest user to download via App Store
-@State var purchasedVersion: String = ""                                                    // Return Purchased Version
-@State var purchasedDate: String = ""                                                       // Return Purchased Date
-@State var maxSkip: Int = 3                                                                 // Set Max Skip Times in case your user may not be able to verify at that moment
-@State var allowJailbreak: Bool = false                                                     // Prevent user to tweak your app/game in a JB environment
+@State var appStoreURL: String = "https://apps.apple.com/app/betterappicons/id1532627187"
+@State var purchasedVersion: String = ""
+@State var purchasedDate: String = ""
+@State var maxSkip: Int = 3
+@State var allowJailbreak: Bool = false
 ```
 
 3. Then, paste this code inside body or any some View.
