@@ -41,8 +41,9 @@ import AntiFraudKit
 ```
 
 2. Add States before body or any some View.
+
 State | Type | Default | Remark
---------- | ------ | ----------
+----- | ---- | ------- | ------
 appStoreURL | String | "https://apps.apple.com/app/betterappicons/id1532627187" | Suggest user to download via App Store
 purchasedVersion | String | "" | Return Purchased Version
 purchasedDate | String | "" | Return Purchased Version
