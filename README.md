@@ -47,8 +47,8 @@ State | Type | Default | Remark
 appStoreURL | String | "https://apps.apple.com/app/betterappicons/id1532627187" | Suggest user to download via App Store
 purchasedVersion | String | "" | Return Purchased Version
 purchasedDate | String | "" | Return Purchased Version
-maxSkip | String | "" | Set Max Skip Times in case your user may not be able to verify at that moment
-allowJailbreak | String | "" | Prevent user to tweak your app/game in a JB environment
+maxSkip | Int | 3 | Set Max Skip Times in case your user may not be able to verify at that moment
+allowJailbreak | Bool | false | Prevent user to tweak your app/game in a JB environment
 
 Samples:
 ```swift
