@@ -23,6 +23,7 @@ Provide an easy integration and UI for Apple Developers to protect the copyright
 Tested on | Latest | Compatible
 --------- | ------ | ----------
 iOS       | 16     | 16
+iPadOS    | 16     | 16
 macOS     | 13     | 13
 
 ## Get Started
