@@ -24,10 +24,12 @@ struct ContentView: View {
                 Color.blue
             }.ignoresSafeArea(.all)
             
+#if !targetEnvironment(simulator)
             // MARK: - ATFraud Start
             if #available(iOS 16, macOS 13, *) {
                 ATFraud(appStoreURL: $appStoreURL, purchasedVersion: $purchasedVersion, purchasedDate: $purchasedDate, maxSkip: $maxSkip, allowJailbreak: $allowJailbreak)
             }
+#endif
         }
     }
 }
