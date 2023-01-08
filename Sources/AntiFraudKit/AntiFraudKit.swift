@@ -22,6 +22,8 @@ public struct ATFraud: View {
     @State var skip: Bool = false
     
     @State var showAlertBox: Bool = false
+
+    @State var rotateDeg = 0
     
     public init(appStoreURL: Binding<String>, purchasedVersion: Binding<String>, purchasedDate: Binding<String>, maxSkip: Binding<Int>, allowJailbreak: Binding<Bool>) {
         _appStoreURL = appStoreURL
@@ -118,15 +120,33 @@ public struct ATFraud: View {
 #endif
 #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .pad {
-                heroImg
+                Spacer()
+                LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .mask(
+                        Image(systemName: "person.crop.circle.fill.badge.xmark")
+                            .resizable()
+                            .scaledToFit()
+                            .rotationEffect(.degrees(Double(rotateDeg)))
+                            .padding(25)
+                    )
+                    .rotation3DEffect(.degrees(Double(rotateDeg)), axis: (x: 0, y: 1, z: 0))
+                    .onAppear {
+                        withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
+                            rotateDeg = 360
+                        }
+                    }
+                    .frame(width: 350 ,height: 350)
+                Spacer()
             }
 #endif
         }
 #if os(iOS)
+        .navigationTitle("Anti-Fraud Checking...")
         .toolbar {
             ToolbarItemGroup(placement:.navigationBarLeading) {
-                Text("Anti-Fraud Checking...")
-                    .bold()
+                Text("Connected to Apple Server")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
             ToolbarItemGroup(placement:.navigationBarTrailing) {
                 sheetAction
@@ -135,16 +155,6 @@ public struct ATFraud: View {
 #elseif os(macOS)
         .padding()
 #endif
-    }
-    
-    public var heroImg: some View {
-        AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1655720408861-8b04c0724fd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80")) { image in
-            image
-                .resizable()
-                .scaledToFill()
-        } placeholder: {
-            ProgressView()
-        }
     }
     
     public var sheetAction: some View {
@@ -192,7 +202,6 @@ public struct ATFraud: View {
         }
         catch {
             err = "Invalid"
-//            await verifyPurchase()
         }
     }
 
@@ -210,6 +219,4 @@ public struct ATFraud: View {
         }
     }
 #endif
-
 }
-
