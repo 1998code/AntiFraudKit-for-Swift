@@ -31,7 +31,7 @@ macOS     | 13     | 13
 Coming Soon 🤗
 
 ### Basic Setup
-Add ```https://github.com/1998code/AntiFraudKit-for-Swift``` to package and switch to ```main``` branch.
+Add ```https://github.com/1998code/AntiFraudKit-for-Swift``` to package and switch to ```main``` branch to get the latest development update.
 <img width="1194" alt="CleanShot 2022-12-26 at 11 21 07@2x" src="https://user-images.githubusercontent.com/54872601/209495745-7b6a9267-9ac9-4bc0-a49e-7f200cd8a415.png">
 
 ### Major Usage
