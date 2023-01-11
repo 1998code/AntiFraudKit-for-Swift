@@ -141,7 +141,8 @@ public struct ATFraud: View {
 #endif
         }
 #if os(iOS)
-        .navigationTitle("Anti-Fraud Checking...")
+        .navigationTitle(UIDevice.current.userInterfaceIdiom == .pad ? "Anti-Fraud Checking..." : "")
+        .navigationBarTitleDisplayMode(UIDevice.current.userInterfaceIdiom == .pad ? .large : .inline)
         .toolbar {
             ToolbarItemGroup(placement:.navigationBarLeading) {
                 Text("Connected to Apple Server")
