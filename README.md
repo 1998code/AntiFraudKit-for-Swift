@@ -80,6 +80,15 @@ Instead of using seperate states, inline binding works too.
 </plist>
 ```
 
+## Possible Conflict
+If you use other sheets, e.g., SwiftNewKit, be sure to hide it before AntiFraudKit runs.
+```swift
+if (purchasedDate || purchasedVersion) {
+  SwiftNEW(...
+}
+```
+* AntiFraudKit's show priority MUST always be higher than any other sheet!
+
 ## Developer Note
 - Please report bugs in Issues section.
 - If you want to discuss future roadmap or contribution, please find on Discussions.
