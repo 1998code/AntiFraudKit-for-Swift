@@ -1,5 +1,5 @@
 # AntiFraudKit
-### Accelerated by Apple SwiftUI
+### Accelerated by Apple SwiftUI & StoreKit
 
 ![hero](https://user-images.githubusercontent.com/54872601/209469175-22a5fa36-caa7-4bd3-9c30-a16deb2d7a5b.png)
 
