@@ -121,22 +121,19 @@ public struct ATFraud: View {
 #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .pad {
                 Spacer()
-                LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .mask(
-                        Image(systemName: "person.crop.circle.fill.badge.xmark")
-                            .resizable()
-                            .scaledToFit()
-                            .rotationEffect(.degrees(Double(rotateDeg)))
-                            .padding(25)
-                    )
-                    .rotation3DEffect(.degrees(Double(rotateDeg)), axis: (x: 0, y: 1, z: 0))
-                    .onAppear {
-                        withAnimation(Animation.linear(duration: 3).repeatForever(autoreverses: false)) {
-                            rotateDeg = 360
-                        }
-                    }
-                    .frame(width: 350 ,height: 350)
+                AsyncImage(url: URL(string: "https://www.apple.com/v/app-store/b/images/overview/icon_appstore__ev0z770zyxoy_large_2x.png")!) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 250, height: 250)
                 Spacer()
+                Text("Starting from iOS 16, the app developer required you to provide a valid purchase record via Apple Official AppTransaction API. If you download the app outside Apple App Store / 3rd party app store, please make sure you purchase a license in App Store before all skip time runs out. If you think something is not working as expected or need help, please contact support via email/link provided on the App Store page. Thank you.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding()
             }
 #endif
         }
