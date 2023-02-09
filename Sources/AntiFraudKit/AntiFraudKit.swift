@@ -67,6 +67,7 @@ public struct ATFraud: View {
 #elseif os(macOS)
                     sheet
                         .interactiveDismissDisabled()
+                        .frame(width: 325, height: 100)
 #endif
                 }
                 .alert(isPresented: $showAlertBox) {
@@ -94,13 +95,15 @@ public struct ATFraud: View {
     
     public var sheet: some View {
         VStack {
-            #if os(macOS)
+#if os(macOS)
             HStack {
                 Text("Anti-Fraud Checking...")
                     .bold()
+                Spacer()
                 sheetAction
             }
-            #endif
+            Spacer()
+#endif
             HStack {
                 VStack(alignment: .leading) {
                     Label("App Store Receipt", systemImage: "purchased.circle")
@@ -117,6 +120,15 @@ public struct ATFraud: View {
             }
 #if os(iOS)
             .padding()
+#endif
+#if os(macOS)
+            Button(action: { exit(0) }) {
+                HStack {
+                    Spacer()
+                    Text("Close App")
+                    Spacer()
+                }
+            }
 #endif
 #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .pad {
