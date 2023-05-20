@@ -1,4 +1,5 @@
 # AntiFraudKit
+[![Swift](https://github.com/1998code/AntiFraudKit-for-Swift/actions/workflows/swift.yml/badge.svg?branch=main)](https://github.com/1998code/AntiFraudKit-for-Swift/actions/workflows/swift.yml)
 ### Accelerated by Apple SwiftUI & StoreKit
 
 <img width="720px" src="https://user-images.githubusercontent.com/54872601/209469175-22a5fa36-caa7-4bd3-9c30-a16deb2d7a5b.png" />
